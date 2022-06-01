@@ -1,0 +1,99 @@
+<nav class="navbar navbar-light bg-primary mt-3 ">
+    <div class="container-fluid">
+        <h1 class="text-light">CRUD Operations</h1>
+        <div class="d-flex">
+            <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success ">Add Employ</button>
+        </div>
+    </div>
+</nav>
+<!-- Table Content -->
+
+<table class="table mt-3">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">MobileNo</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let row of loginUser">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobile}}</td>
+            <td>{{row.salary}}</td>
+            <td>
+                <button (click)="onEdit(row)" class="bg-info " data-toggle="modal" data-target="#exampleModal"
+                    class="btn btn-info w-25 ">Edit</button>
+
+                <button (click)="deleteEmploy(row)" data-target="#exampleModal"
+                    class="btn btn-danger text-light mx-3 w-25">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formValue">
+                    <!--Forms creation -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <input type="email" formControlName="name" class="form-control" id="exampleInputEmail1"
+                            placeholder="Enter Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" class="form-label">Email ID</label>
+                        <input type="email" formControlName="email" class="form-control" id="exampleInputemail"
+                            placeholder="Enter Email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">Mobile No</label>
+                        <input type="text" formControlName="mobile" class="form-control" id="exampleInputEmail1"
+                            placeholder="Enter Mobile No">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" class="form-label">Salary</label>
+                        <input type="text" formControlName="salary" class="form-control" id="exampleInputEmail1"
+                            placeholder="Enter salary">
+                    </div>
+
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                <button *ngIf="loginUser" type="button" class="btn btn-primary"
+                    (click)="postEmployDetails()">Add</button>
+
+                <button *ngIf="!loginUser" type="button" (click)="updateEmployDetails()"
+                    class="btn btn-primary">Update</button>
+
+            </div>
+        </div>
+    </div>
+</div>
